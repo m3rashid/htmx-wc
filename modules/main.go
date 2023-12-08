@@ -1,26 +1,21 @@
 package modules
 
 import (
-	"os"
+	"context"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/m3rashid/htmx-wc/components"
 )
 
 func RegisterRoutes(app *fiber.App) {
 	app.Get("/", func(c *fiber.Ctx) error {
-		return c.Render("index", fiber.Map{
-			"Title": os.Getenv("APP_NAME"),
-			// "headerItems": fiber.Map{
-			// 	"Dashboard": "/dashboard",
-			// 	"Team":      "/team",
-			// 	"Projects":  "/projects",
-			// 	"Calender":  "/calender",
-			// },
-			// "activeHeader": "/",
-		})
+		c.Set("Content-Type", "text/html")
+		component := components.Index("Rashid")
+		return component.Render(c.Context(), c.Response().BodyWriter())
 	})
 
 	app.Post("/clicked", func(c *fiber.Ctx) error {
-		return c.SendString("<fluent-button id='parent-div'>Clicked hello world</fluent-button>")
+		component := components.Hello("sdfkasdfaksdhfaksdf")
+		return component.Render(context.Background(), c.Response().BodyWriter())
 	})
 }

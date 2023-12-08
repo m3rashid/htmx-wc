@@ -9,7 +9,6 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/favicon"
 	"github.com/gofiber/fiber/v2/middleware/limiter"
 	"github.com/gofiber/fiber/v2/middleware/logger"
-	"github.com/gofiber/template/html/v2"
 	"github.com/joho/godotenv"
 	"github.com/m3rashid/htmx-wc/modules"
 )
@@ -20,9 +19,9 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	engine := html.New("./views", ".html")
+	// engine := html.New("./views", ".html")
 	app := fiber.New(fiber.Config{
-		Views: engine, CaseSensitive: true,
+		// Views: engine, CaseSensitive: true,
 		AppName:        os.Getenv("APP_NAME"),
 		RequestMethods: []string{"GET", "POST", "HEAD", "OPTIONS"},
 	})
